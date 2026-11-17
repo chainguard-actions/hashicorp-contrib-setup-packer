@@ -1,0 +1,26 @@
+name: Test specific Packer version
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - id: action
+        uses: .
+        with:
+          packer-version: "1.10.0"
+      - name: Assert packer installed with requested version
+        run: |
+          if ! command -v packer >/dev/null 2>&1; then
+            echo "FAIL: packer not found on PATH"
+            exit 1
+          fi
+          echo "packer path: $(command -v packer)"
+          OUT="$(packer version)"
+          echo "packer version output: $OUT"
+          if ! echo "$OUT" | grep -q "1.10.0"; then
+            echo "FAIL: expected version 1.10.0"
+            exit 1
+          fi
+          echo "PASS"

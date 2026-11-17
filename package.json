@@ -1,0 +1,29 @@
+{
+  "name": "setup-packer",
+  "version": "4.0.0",
+  "private": true,
+  "license": "ISC",
+  "author": "Sora Morimoto <sora@morimoto.io>",
+  "scripts": {
+    "build": "esbuild --bundle --format=cjs --outfile=dist/index.js --platform=node --target=node24 src/index.ts",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "lint": "biome lint .",
+    "type-check": "tsc"
+  },
+  "dependencies": {
+    "@actions/core": "3.0.1",
+    "@actions/exec": "3.0.0",
+    "@actions/github": "9.1.1",
+    "@actions/io": "3.0.2",
+    "@actions/tool-cache": "4.0.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.0",
+    "@tsconfig/node24": "24.0.4",
+    "@tsconfig/strictest": "2.0.8",
+    "@types/node": "25.9.3",
+    "esbuild": "0.28.1",
+    "typescript": "6.0.3"
+  }
+}
